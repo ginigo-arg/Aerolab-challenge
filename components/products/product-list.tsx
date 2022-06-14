@@ -9,13 +9,12 @@ type Props = {
 
 export default function ProductList<Props>({ products }) {
   const [productsFiltered, setProductsFiltered] = useState<Products[]>([]);
-  const { category } = useFilters();
-  const filterAllProducts = "All products";
+  const { category, sort } = useFilters();
   let productCategory: string[] = [];
   useEffect(() => {
     // console.log("categorii:", category);
     const newProducts = products.filter((product) => {
-      if (category === filterAllProducts) return true;
+      if (category === "All products") return true;
       else if (product.category === category) return true;
       return false;
     });
@@ -24,18 +23,31 @@ export default function ProductList<Props>({ products }) {
     // console.log("news", newProducts);
     // console.log("filtered", productsFiltered);
     setProductsFiltered(newProducts);
-  }, [category]);
+  }, [category, sort]);
   return (
     <div className="border grid grid-cols-4 gap-3">
       {productsFiltered.length > 0 ? (
-        productsFiltered.map((product) => (
-          <CardProduct
-            name={product.name}
-            category={product.category}
-            price={product.cost}
-            image={product.img.url}
-          />
-        ))
+        productsFiltered
+          .map((product, index) => {
+            return {
+              index: index,
+              product: product,
+            };
+          })
+          .sort((a, b) => {
+            if (sort === 0) return a.product.cost - b.product.cost;
+            if (sort === 1) return b.product.cost - a.product.cost;
+            return a.index - b.index;
+          })
+          .map((product, index) => (
+            <CardProduct
+              key={product.product._id}
+              name={product.product.name}
+              category={product.product.category}
+              price={product.product.cost}
+              image={product.product.img.url}
+            />
+          ))
       ) : (
         <h2>No se encontraron productos</h2>
       )}

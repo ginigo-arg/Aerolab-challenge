@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import Select from "react-select";
-import { filterContext, useFilters } from "../../context/filterContext";
+import { useFilters } from "../../context/filterContext";
 
 const options = [
   { value: "all products", label: "All products" },
