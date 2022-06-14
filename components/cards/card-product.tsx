@@ -18,7 +18,7 @@ export default function CardProduct({
 
           <div className="p-6">
             <h2 className="font-semibold text-2xl mb-3">{`$${price}`}</h2>
-            <h5 className="text-gray-900 text-xl font-medium mb-1">{name}</h5>
+            <h5 className="text-gray-900 text-md font-medium mb-1">{name}</h5>
             <p className="text-gray-700 text-base mb-4">{category}</p>
             <button
               type="button"

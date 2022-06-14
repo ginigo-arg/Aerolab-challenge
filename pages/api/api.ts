@@ -11,9 +11,8 @@ const method = {
 
 export default {
   getAllProducts: async (): Promise<Products[] | false> => {
-    return fetch(process.env.API_URL, method)
+    return fetch(process.env.API_URL_PRODUCTS, method)
       .then((res) => res.json())
       .catch((error) => console.log(error));
-    return false;
   },
 };

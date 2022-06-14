@@ -3,24 +3,22 @@ import Head from "next/head";
 import Image from "next/image";
 import LayoutProducts from "../components/layouts/layoutProducts";
 import ProductList from "../components/list/product-list";
+import SectionFilters from "../components/products/SectionFilters";
 import Slide from "../components/slide";
 import { Products } from "../components/types";
 import Api from "./api/api";
 
-export interface Image {
-  url: number;
-  hdUrl: number;
-}
-
-interface Props {
+type Props = {
   products: Products;
-}
+};
 
 const Home: NextPage<Props> = ({ products }) => {
   return (
     <>
       <Slide />
+
       <LayoutProducts>
+        <SectionFilters />
         <ProductList products={products} />
       </LayoutProducts>
     </>
