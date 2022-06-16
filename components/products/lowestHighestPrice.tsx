@@ -7,7 +7,6 @@ export default function LowHighPrice() {
     lowPrice: 0,
     highPrice: 0,
   });
-  console.log(active);
   const isActive =
     "bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-2 px-8 rounded-md mr-2 font-semibold";
   const notActive =
@@ -23,7 +22,9 @@ export default function LowHighPrice() {
           }),
           handleChangePrice(0)
         )}
-        className={`${active.lowPrice === 1 ? `${isActive}` : `${notActive}`}`}
+        className={`${
+          active.lowPrice === 1 ? `${isActive}` : `${notActive}`
+        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-8 rounded-md mr-2 font-semibold `}
       >
         Lowest price
       </button>
@@ -35,7 +36,9 @@ export default function LowHighPrice() {
           }),
           handleChangePrice(1)
         )}
-        className={`${active.lowPrice === 0 ? `${isActive}` : `${notActive}`}`}
+        className={`${
+          active.lowPrice === 0 ? `${isActive}` : `${notActive}`
+        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-8 rounded-md mr-2 font-semibold `}
       >
         Highest Price
       </button>

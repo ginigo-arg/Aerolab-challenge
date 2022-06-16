@@ -1,9 +1,12 @@
+import SvgCoin from "../icons/coin";
+
 type CardProduct = {
   name: string;
   category: string;
   price: number;
   image: string;
 };
+
 export default function CardProduct({
   name,
   category,
@@ -17,14 +20,17 @@ export default function CardProduct({
           <img className="rounded-t-lg" src={image} alt="" />
 
           <div className="p-6">
-            <h2 className="font-semibold text-2xl mb-3">{`$${price}`}</h2>
+            <div className="flex flex-row items-center justify-start">
+              <SvgCoin />
+              <h2 className="font-bold text-2xl text-gray-600">{`${price}`}</h2>
+            </div>
             <h5 className="text-gray-900 text-md font-medium mb-1">{name}</h5>
             <p className="text-gray-700 text-base mb-4">{category}</p>
             <button
               type="button"
-              className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+              className=" w-full h-10 font-bold tracking-wide bg-gradient-to-r from-sky-500 to-indigo-500 inline-block px-6 py-2.5  text-white text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg"
             >
-              Button
+              Reedem
             </button>
           </div>
         </div>

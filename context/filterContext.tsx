@@ -7,6 +7,7 @@ import React, {
   useRef,
 } from "react";
 import { Products } from "../components/types";
+import { userPage } from "../Hooks/usePager";
 import { reducer } from "./Reducer";
 interface Context {
   category: string;
@@ -42,10 +43,17 @@ const initialProducts = {
 };
 
 export const useProvideFilters = () => {
-  const ref = useRef();
+  const [limit, setLimit] = useState<number>(16);
   const [category, setCategory] = useState<string>("All products");
+  const { page, handleNavigate, handleNextPage, handlePrevPage } = userPage();
   const [sort, setSort] = useState<Sort>(Sort["Highest Price"]);
   const [state, dispatch] = useReducer(reducer, initialProducts);
+  const totalPages = Math.ceil(state.products.length / limit);
+
+  useEffect(() => {
+    if (page > totalPages && totalPages !== 0) handleNavigate(totalPages);
+    else if (page < 1) handleNavigate(page + 1);
+  });
 
   function getAllProducts(products: Products[]) {
     dispatch({
@@ -85,5 +93,9 @@ export const useProvideFilters = () => {
     handleSearchFilter,
     sort,
     state,
+    page,
+    handleNextPage,
+    handlePrevPage,
+    limit,
   };
 };
