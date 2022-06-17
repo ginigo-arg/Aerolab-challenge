@@ -1,4 +1,4 @@
-import { Products } from "../../components/types";
+import { Products, User } from "../../components/types";
 
 const method = {
   method: "GET",
@@ -8,11 +8,17 @@ const method = {
     Authorization: process.env.API_TOKEN,
   },
 };
+export const getAllProducts = async (): Promise<Products[] | false> => {
+  const products = await fetch(process.env.API_URL_PRODUCTS, method)
+    .then((res) => res.json())
+    .catch(() => console.log("Error al obtener los productos"));
+  return products;
+};
 
-export default {
-  getAllProducts: async (): Promise<Products[] | false> => {
-    return fetch(process.env.API_URL_PRODUCTS, method)
-      .then((res) => res.json())
-      .catch((error) => console.log(error));
-  },
+export const getUser = async (): Promise<User | null> => {
+  const user = await fetch(process.env.API_URL_USER, method)
+    .then((res) => res.json())
+    .catch(() => console.log("Error al obtener el usuario"));
+
+  return user;
 };
