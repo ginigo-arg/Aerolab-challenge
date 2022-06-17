@@ -48,7 +48,11 @@ export const useProvideFilters = () => {
   const { page, handleNavigate, handleNextPage, handlePrevPage } = userPage();
   const [sort, setSort] = useState<Sort>(Sort["Highest Price"]);
   const [state, dispatch] = useReducer(reducer, initialProducts);
-  const totalPages = Math.ceil(state.products.length / limit);
+  const totalPageAll = Math.ceil(state.products.length / limit);
+  const totalPageFilter = Math.ceil(state.filteredProducts.length / limit);
+  const totalPages = state.filteredProducts.length
+    ? totalPageFilter
+    : totalPageAll;
 
   useEffect(() => {
     if (page > totalPages && totalPages !== 0) handleNavigate(totalPages);
@@ -97,5 +101,6 @@ export const useProvideFilters = () => {
     handleNextPage,
     handlePrevPage,
     limit,
+    totalPages,
   };
 };

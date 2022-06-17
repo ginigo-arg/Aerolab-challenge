@@ -1,19 +1,13 @@
-const SvgArrowLeft = (props) => (
+const SvgArrowLeft = ({ className, color }) => (
   <svg
-    width={32}
-    height={32}
-    viewBox="0 0 45 50"
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
+    className={className}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke={color}
+    strokeWidth={2}
   >
-    <title>{"arrow-left"}</title>
-    <g fill="none" fillRule="evenodd">
-      <circle stroke="#D9D9D9" cx={24} cy={24} r={23.5} />
-      <path
-        fill="#D9D9D9"
-        d="m27.705 28.295-4.58-4.59 4.58-4.59-1.41-1.41-6 6 6 6z"
-      />
-    </g>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
   </svg>
 );
 
