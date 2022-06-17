@@ -9,3 +9,11 @@ export interface Products {
   cost: number;
   category: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  points: number;
+  redeemHistory: [];
+  createDate: Date;
+}
