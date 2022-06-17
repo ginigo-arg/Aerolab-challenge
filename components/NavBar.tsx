@@ -1,4 +1,6 @@
 import Image from "next/image";
+import ContainerCoins from "./user/containerCoins";
+import UserDates from "./user/userDates";
 
 type User = {
   user: string;
@@ -12,7 +14,8 @@ export default function NavBar({ user }: User) {
         height={40}
         alt="Aerolab"
       />
-      <p>{user}</p>
+      <ContainerCoins />
+      <UserDates />
     </div>
   );
 }
