@@ -4,18 +4,21 @@ import React, {
   useContext,
   useReducer,
   useEffect,
-  useRef,
 } from "react";
-import { Products } from "../components/types";
+import { Products, User } from "../components/types";
 import { userPage } from "../Hooks/usePager";
 import { reducer } from "./Reducer";
+import { postCoins } from "../pages/api/api";
 interface Context {
+  state: [];
   category: string;
   getAllProducts: (index: Products[]) => void;
   handleChangeFilter: (index: string) => void;
   handleChangePrice: (index: number) => void;
   handleSearchFilter: (index: string) => void;
+  handleAddCoins: (index: number) => void;
   setProducts: (index: Products[]) => void;
+  getUser: (indes: User) => void;
 }
 
 enum Sort {
@@ -40,11 +43,11 @@ export const useFilters = () => {
 const initialProducts = {
   products: [],
   filteredProducts: [],
+  user: [],
 };
 
 export const useProvideFilters = () => {
   const [limit, setLimit] = useState<number>(16);
-  const [category, setCategory] = useState<string>("All products");
   const { page, handleNavigate, handleNextPage, handlePrevPage } = userPage();
   const [sort, setSort] = useState<Sort>(Sort["Highest Price"]);
   const [state, dispatch] = useReducer(reducer, initialProducts);
@@ -65,6 +68,13 @@ export const useProvideFilters = () => {
       payload: products,
     });
   }
+  const getUser = (user: User) => {
+    dispatch({
+      type: "GET_USER",
+      payload: user,
+    });
+  };
+
   const handleChangeFilter = (label: string, products) => {
     dispatch({
       type: "PRODUCTS_BY_CATEGORY",
@@ -89,9 +99,16 @@ export const useProvideFilters = () => {
     });
   };
 
+  const handleAddCoins = async (coins: 1000 | 5000 | 7500) => {
+    const resp = await postCoins(coins);
+    dispatch({
+      type: "UPDATE_COINS",
+      payload: resp["New Points"],
+    });
+  };
+
   return {
     getAllProducts,
-    category,
     handleChangeFilter,
     handleChangePrice,
     handleSearchFilter,
@@ -102,5 +119,7 @@ export const useProvideFilters = () => {
     handlePrevPage,
     limit,
     totalPages,
+    getUser,
+    handleAddCoins,
   };
 };

@@ -13,7 +13,7 @@ export default function LowHighPrice() {
     "bg-gray-300 py-2 px-8 rounded-md mr-2 font-semibold text-gray-400";
   return (
     <div>
-      <span className="mr-1">Sort By</span>
+      <span className="hidden md:inline mr-1">Sort By</span>
       <button
         onClick={() => (
           setActive({
@@ -24,7 +24,7 @@ export default function LowHighPrice() {
         )}
         className={`${
           active.lowPrice === 1 ? `${isActive}` : `${notActive}`
-        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-8 rounded-md mr-2 font-semibold `}
+        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-4 md:px-8 rounded-md mr-2 font-semibold `}
       >
         Lowest price
       </button>
@@ -38,7 +38,7 @@ export default function LowHighPrice() {
         )}
         className={`${
           active.lowPrice === 0 ? `${isActive}` : `${notActive}`
-        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-8 rounded-md mr-2 font-semibold `}
+        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-4 md:px-8 rounded-md mr-2 font-semibold `}
       >
         Highest Price
       </button>

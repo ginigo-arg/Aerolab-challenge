@@ -65,8 +65,8 @@ export default function CategoryFilter({ products }) {
   const { handleChangeFilter } = useFilters();
   return (
     <>
-      <div className="flex flex-row justify-start items-center">
-        <span className="my-auto mr-1">Filter by</span>
+      <div className="flex flex-row items-end">
+        <span className="hidden md:inline my-auto mr-1">Filter by</span>
         <Select
           options={options}
           defaultValue={options[0]}

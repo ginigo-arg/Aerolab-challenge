@@ -8,7 +8,7 @@ import SectionFilters from "../components/products/SectionFilters";
 import Slide from "../components/slide";
 import { Products, User } from "../components/types";
 import { filterContext, useFilters } from "../context/filterContext";
-import { getAllProducts, getUser } from "./api/api";
+import { getAllProducts, getUser, postCoins } from "./api/api";
 
 type Props = {
   products: Products[];
@@ -16,10 +16,10 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ products, user }) => {
-  const { getAllProducts } = useContext(filterContext);
+  const { getAllProducts, getUser } = useContext(filterContext);
   useEffect(() => {
     getAllProducts(products);
-    console.log("user", user);
+    getUser(user);
   }, []);
   return (
     <>

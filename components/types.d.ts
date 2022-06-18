@@ -17,3 +17,8 @@ export interface User {
   redeemHistory: [];
   createDate: Date;
 }
+
+export interface AddCoin {
+  message: string;
+  "new Points": number;
+}

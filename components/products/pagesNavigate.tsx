@@ -3,6 +3,7 @@ import SvgArrowLeft from "../icons/arrowLeft";
 import SvgArrowRight from "../icons/arrowRight";
 import { GRAY_600, GRAY_400 } from "../../colors";
 import { useFilters } from "../../context/filterContext";
+import { TEXT_GRADIENT } from "../../colors";
 export default function PagesNavigate() {
   const { page, totalPages, handleNextPage, handlePrevPage } = useFilters();
 
@@ -19,7 +20,7 @@ export default function PagesNavigate() {
       >
         <SvgArrowLeft className="h-6 w-6" color={GRAY_400} />
       </button>
-      <p className="mx-2">
+      <p className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-700 font-bold px-1">
         Page {page} of {totalPages}
       </p>
       <button
