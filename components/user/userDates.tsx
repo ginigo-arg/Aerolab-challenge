@@ -1,9 +1,7 @@
-import { stat } from "fs";
 import Image from "next/image";
 import { useState } from "react";
 import { GRAY_400 } from "../../colors";
 import { useFilters } from "../../context/filterContext";
-import { postCoins } from "../../pages/api/api";
 import Button from "../button";
 import { SvgClose } from "../icons/close";
 import { SvgPlus } from "../icons/plus";
@@ -58,8 +56,8 @@ export default function UserDates(): JSX.Element {
         <div className="flex flex-col justify-between text-center ">
           <h2 className="font-bold text-lg">{state.user.name}</h2>
           <p>
-            Add coinst your acount, selecting the score below and push Add coins
-            button
+            Add coins at your acount, selecting the score below and push Add
+            coins button
           </p>
           <div className="flex flex-row justify-between mt-3 mb-3">
             <Button

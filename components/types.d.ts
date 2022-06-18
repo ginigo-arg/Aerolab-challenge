@@ -18,6 +18,12 @@ export interface User {
   createDate: Date;
 }
 
+export interface IContext {
+  products: Products[];
+  filteredProducts: Products[];
+  user: User;
+}
+
 export interface AddCoin {
   message: string;
   "new Points": number;

@@ -5,13 +5,17 @@ import React, {
   useReducer,
   useEffect,
 } from "react";
-import { Products, User } from "../components/types";
+import { Products, User, IContext } from "../components/types";
 import { userPage } from "../Hooks/usePager";
 import { reducer } from "./Reducer";
 import { postCoins } from "../pages/api/api";
 interface Context {
-  state: [];
-  category: string;
+  children: React.ReactNode;
+  state: IContext[];
+  totalPages: number;
+  sort: number;
+  limit: number;
+  page: number;
   getAllProducts: (index: Products[]) => void;
   handleChangeFilter: (index: string) => void;
   handleChangePrice: (index: number) => void;
@@ -28,7 +32,7 @@ enum Sort {
 
 export const filterContext = createContext({} as Context);
 
-export const FilterProvide: React.FC = ({ children }) => {
+export const FilterProvide: React.FC<Context> = ({ children }) => {
   const filters = useProvideFilters();
 
   return (
@@ -47,7 +51,7 @@ const initialProducts = {
 };
 
 export const useProvideFilters = () => {
-  const [limit, setLimit] = useState<number>(16);
+  const limit: number = 16;
   const { page, handleNavigate, handleNextPage, handlePrevPage } = userPage();
   const [sort, setSort] = useState<Sort>(Sort["Highest Price"]);
   const [state, dispatch] = useReducer(reducer, initialProducts);
@@ -89,7 +93,7 @@ export const useProvideFilters = () => {
     num === 0 ? setSort(Sort["Lowest Price"]) : setSort(Sort["Highest Price"]);
   };
 
-  const handleSearchFilter = (query, products) => {
+  const handleSearchFilter = (query: string, products: Products) => {
     dispatch({
       type: "PRODUCTS_BY_QUERY",
       payload: {
@@ -108,17 +112,17 @@ export const useProvideFilters = () => {
   };
 
   return {
+    state,
+    totalPages,
+    sort,
+    limit,
+    page,
     getAllProducts,
     handleChangeFilter,
     handleChangePrice,
     handleSearchFilter,
-    sort,
-    state,
-    page,
     handleNextPage,
     handlePrevPage,
-    limit,
-    totalPages,
     getUser,
     handleAddCoins,
   };
