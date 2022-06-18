@@ -1,10 +1,17 @@
+import { stat } from "fs";
 import Image from "next/image";
+import { useState } from "react";
 import { GRAY_400 } from "../../colors";
+import { useFilters } from "../../context/filterContext";
+import { postCoins } from "../../pages/api/api";
 import Button from "../button";
 import { SvgClose } from "../icons/close";
 import { SvgPlus } from "../icons/plus";
 
-export default function UserDates(): React.ReactNode {
+export default function UserDates(): JSX.Element {
+  const { state, handleAddCoins } = useFilters();
+  const [coinValue, setCoinValue] = useState<number>();
+
   const ShowDropDown = () => {
     const id = document.getElementById("dropDown");
     if (id.classList.contains("hidden")) {
@@ -13,6 +20,11 @@ export default function UserDates(): React.ReactNode {
       id.classList.add("hidden");
     }
   };
+
+  const getCoinValue = (coin: number) => {
+    setCoinValue(coin);
+  };
+
   return (
     <>
       <div className="flex flex-row items-center  justify-around px-3 py-1 w-28">
@@ -25,7 +37,7 @@ export default function UserDates(): React.ReactNode {
         <Image
           className="rounded-full"
           src="/images/Guillermo_francella.png"
-          alt=""
+          alt={state.user.name}
           width={32}
           height={32}
         />
@@ -33,7 +45,7 @@ export default function UserDates(): React.ReactNode {
 
       <div
         id="dropDown"
-        className="absolute top-16 right-1 w-72 z-20 flex flex-col justify-between bg-white border rounded-md p-1"
+        className="hidden absolute top-16 right-1 w-72 z-20 flex flex-col justify-between bg-white border rounded-md p-1"
       >
         {/* dropDown head */}
         <div className="border-b-2 relative py-2 mb-3 flex flex-row justify-between items-center w-full font-semibold text-lg text-gray-800">
@@ -43,13 +55,33 @@ export default function UserDates(): React.ReactNode {
           </button>
         </div>
         {/* dropDown body */}
-        <div className="flex flex-col justify-around">
-          <div className="flex flex-row justify-between mb-3">
-            <Button className="px-5 py-1" text="2500" />
-            <Button className="px-5 py-1" text="5000" />
-            <Button className="px-5 py-1" text="7500" />
+        <div className="flex flex-col justify-between text-center ">
+          <h2 className="font-bold text-lg">{state.user.name}</h2>
+          <p>
+            Add coinst your acount, selecting the score below and push Add coins
+            button
+          </p>
+          <div className="flex flex-row justify-between mt-3 mb-3">
+            <Button
+              className="px-5 py-1"
+              text="1000"
+              onClick={() => getCoinValue(1000)}
+            />
+            <Button
+              className="px-5 py-1"
+              text="5000"
+              onClick={() => getCoinValue(5000)}
+            />
+            <Button
+              className="px-5 py-1"
+              text="7500"
+              onClick={() => getCoinValue(7500)}
+            />
           </div>
-          <button className="w-full h-10 text-white bg-gradient-to-r from-sky-500 to-indigo-500 mb-2 rounded-md font-bold">
+          <button
+            onClick={() => handleAddCoins(coinValue)}
+            className="w-full h-10 text-white bg-gradient-to-r from-sky-500 to-indigo-500 mb-2 rounded-md font-bold"
+          >
             Add coins
           </button>
         </div>

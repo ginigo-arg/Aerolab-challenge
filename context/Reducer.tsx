@@ -1,6 +1,6 @@
 import { Products } from "../components/types";
 
-export const reducer = (state: Products[], action: any): any => {
+export const reducer = (state, action: any): any => {
   switch (action.type) {
     case "GET_ALL_PRODUCTS":
       return { ...state, products: action.payload };
@@ -12,7 +12,6 @@ export const reducer = (state: Products[], action: any): any => {
         ),
       };
     case "PRODUCTS_BY_QUERY":
-      // return console.log(action);
       return {
         ...state,
         filteredProducts: action.payload.produc.filter((product) =>
@@ -21,6 +20,16 @@ export const reducer = (state: Products[], action: any): any => {
             .startsWith(action.payload.query.toLowerCase().trim())
         ),
       };
+
+    case "GET_USER":
+      return { ...state, user: action.payload };
+
+    case "UPDATE_COINS": {
+      state.user.points = action.payload;
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }
