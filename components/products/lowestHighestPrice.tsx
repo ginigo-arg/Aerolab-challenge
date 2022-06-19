@@ -5,7 +5,7 @@ export default function LowHighPrice() {
   const { handleChangePrice } = useContext(filterContext);
   const [active, setActive] = useState({
     lowPrice: 0,
-    highPrice: 0,
+    highPrice: 1,
   });
   const isActive =
     "bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-2 px-8 rounded-md mr-2 font-semibold";
@@ -14,20 +14,6 @@ export default function LowHighPrice() {
   return (
     <div>
       <span className="hidden md:inline mr-1">Sort By</span>
-      <button
-        onClick={() => (
-          setActive({
-            lowPrice: 1,
-            highPrice: 0,
-          }),
-          handleChangePrice(0)
-        )}
-        className={`${
-          active.lowPrice === 1 ? `${isActive}` : `${notActive}`
-        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-4 md:px-8 rounded-md mr-2 font-semibold `}
-      >
-        Lowest price
-      </button>
       <button
         onClick={() => (
           setActive({
@@ -41,6 +27,20 @@ export default function LowHighPrice() {
         } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-4 md:px-8 rounded-md mr-2 font-semibold `}
       >
         Highest Price
+      </button>
+      <button
+        onClick={() => (
+          setActive({
+            lowPrice: 1,
+            highPrice: 0,
+          }),
+          handleChangePrice(0)
+        )}
+        className={`${
+          active.lowPrice === 1 ? `${isActive}` : `${notActive}`
+        } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-4 md:px-8 rounded-md mr-2 font-semibold `}
+      >
+        Lowest price
       </button>
     </div>
   );
