@@ -24,7 +24,7 @@ export const getUser = async (): Promise<User | null> => {
   return user;
 };
 
-export const postCoins = async (amount: Amount): Promise<Amount> => {
+export const postCoins = (amount: Amount): Promise<Amount> => {
   const method = {
     method: "POST",
     headers: {
@@ -34,7 +34,7 @@ export const postCoins = async (amount: Amount): Promise<Amount> => {
     },
     body: JSON.stringify({ amount: amount }),
   };
-  const addCoin = await fetch(
+  const addCoin = fetch(
     process.env.NEXT_PUBLIC_API_URL_POINTS as string,
     method
   )

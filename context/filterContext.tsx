@@ -110,7 +110,9 @@ export const useProvideFilters = () => {
       type: "UPDATE_COINS",
       payload: resp["New Points"],
     });
+    return resp;
   };
+
   const handleRestart = (price: number) => {
     dispatch({
       type: "RESTART_COINS",

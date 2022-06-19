@@ -1,7 +1,7 @@
 import * as React from "react";
 
 const SvgCoin = (props) => (
-  <svg width={34} height={34} xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg width={32} height={32} xmlns="http://www.w3.org/2000/svg" {...props}>
     <title>{"money"}</title>
     <defs>
       <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="68.628%" id="b">

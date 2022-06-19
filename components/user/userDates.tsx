@@ -1,14 +1,18 @@
 import Image from "next/image";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { GRAY_400 } from "../../colors";
 import { useFilters } from "../../context/filterContext";
 import Button from "../button";
 import { SvgClose } from "../icons/close";
 import { SvgPlus } from "../icons/plus";
+import { ToastError } from "../toasts/toastError";
+import { NewPointsToast } from "../toasts/toastUser";
 
 export default function UserDates(): JSX.Element {
   const { state, handleAddCoins } = useFilters();
   const [coinValue, setCoinValue] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const ShowDropDown = () => {
     const id = document.getElementById("dropDown");
@@ -16,6 +20,16 @@ export default function UserDates(): JSX.Element {
       id.classList.remove("hidden");
     } else {
       id.classList.add("hidden");
+    }
+  };
+  const addPoints = async () => {
+    setLoading(true);
+    const resp = await handleAddCoins(coinValue);
+    if (resp.success) {
+      ToastError("We're sorry, we couldn't reedem your coins");
+    } else {
+      setLoading(false);
+      NewPointsToast(`You remeded ${coinValue} coins`);
     }
   };
 
@@ -77,10 +91,10 @@ export default function UserDates(): JSX.Element {
             />
           </div>
           <button
-            onClick={() => handleAddCoins(coinValue)}
+            onClick={addPoints}
             className="w-full h-10 text-white bg-gradient-to-r from-sky-500 to-indigo-500 mb-2 rounded-md font-bold"
           >
-            Add coins
+            {loading ? "Processing..." : "Add coins"}
           </button>
         </div>
       </div>
