@@ -3,5 +3,5 @@ type Props = {
 };
 
 export default function LayoutProducts({ children }: Props) {
-  return <div className="mx-auto max-w-6xl">{children}</div>;
+  return <div className="mx-auto max-w-6xl min-h-screen">{children}</div>;
 }
