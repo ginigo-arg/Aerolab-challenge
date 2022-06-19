@@ -7,13 +7,15 @@ type User = {
 };
 export default function NavBar({ user }: User) {
   return (
-    <div className="flex flex-row justify-between items-center px-5 py-2">
-      <Image
-        src="/images/aerolab-logo.svg"
-        width={40}
-        height={40}
-        alt="Aerolab"
-      />
+    <div className="flex flex-row justify-between items-center px-5 py-2 h-18">
+      <div className="w-28">
+        <Image
+          src="/images/aerolab-logo.svg"
+          width={40}
+          height={40}
+          alt="Aerolab"
+        />
+      </div>
       <ContainerCoins />
       <UserDates />
     </div>
