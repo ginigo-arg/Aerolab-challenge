@@ -24,6 +24,13 @@ export interface IContext {
   user: User;
 }
 
+export interface Amount {
+  amount: number[1000 | 5000 | 7500];
+}
+export interface Reedem {
+  message: string;
+}
+
 export interface AddCoin {
   message: string;
   "new Points": number;
