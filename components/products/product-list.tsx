@@ -1,7 +1,6 @@
 import { useFilters } from "../../context/filterContext";
 import CardProduct from "../cards/card-product";
 import { Products } from "../types";
-import { TEXT_GRADIENT } from "../../colors";
 
 type Props = {
   products: Products;
@@ -34,10 +33,12 @@ export default function ProductList() {
                 return (
                   <CardProduct
                     key={product.product._id}
+                    id={product.product._id}
                     name={product.product.name}
                     category={product.product.category}
                     price={product.product.cost}
                     image={product.product.img.url}
+                    isReedem={product.product.cost > state.user.points}
                   />
                 );
               }

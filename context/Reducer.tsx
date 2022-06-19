@@ -24,12 +24,18 @@ export const reducer = (state, action: any): any => {
     case "GET_USER":
       return { ...state, user: action.payload };
 
-    case "UPDATE_COINS": {
+    case "UPDATE_COINS":
       state.user.points = action.payload;
       return {
         ...state,
       };
-    }
+
+    case "RESTART_COINS":
+      state.user.points -= action.payload;
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

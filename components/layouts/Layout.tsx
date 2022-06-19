@@ -16,8 +16,8 @@ export default function Layout({ children }: Props) {
       </Head>
       <FilterProvide>
         <div className="flex flex-col mx-auto">
-          <header>
-            <NavBar user="John Kite" />
+          <header className="sticky top-0 bg-white z-20 shadow-md">
+            <NavBar />
           </header>
           <main>{children}</main>
           <footer>
