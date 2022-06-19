@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFilters } from "../../context/filterContext";
 import { postReedem } from "../../pages/api/api";
 import SvgCoin from "../icons/coin";
@@ -9,6 +9,7 @@ type CardProduct = {
   price: number;
   image: string;
   id: string;
+  isReedem: boolean;
 };
 
 export default function CardProduct({
@@ -17,9 +18,10 @@ export default function CardProduct({
   price,
   image,
   id,
+  isReedem,
 }: CardProduct) {
   const [loading, setLoading] = useState<boolean>(false);
-  const { handleRestart } = useFilters();
+  const { handleRestart, state } = useFilters();
   const reedemProduct = async () => {
     setLoading(true);
     const resp = await postReedem(id);
@@ -28,7 +30,6 @@ export default function CardProduct({
       handleRestart(price);
     }
   };
-  useEffect(() => {});
 
   return (
     <>
@@ -45,13 +46,24 @@ export default function CardProduct({
             <p className="text-gray-700 text-base mb-4">{category}</p>
             <button
               onClick={reedemProduct}
-              disabled={loading}
+              disabled={loading || isReedem}
               type="button"
               className={`${
-                loading ? "cursor-not-allowed" : "cursor-pointer"
-              } w-full h-10 font-bold tracking-wide bg-gradient-to-r from-sky-500 to-indigo-500 inline-block px-6 py-2.5  text-white text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg`}
+                loading || isReedem
+                  ? "cursor-not-allowed w-full h-10 font-bold tracking-wide bg-gray-200 text-slate-400 rounded-md"
+                  : "cursor-pointer w-full h-10 font-bold tracking-wide bg-gradient-to-r from-sky-500 to-indigo-500 inline-block px-6 py-2.5  text-white text-xs leading-tight uppercase rounded shadow-md hover:bg-gradient-to-r hover:from-indigo-500 hover:to-sky-500 transition-all"
+              } `}
             >
-              {loading ? "Processing..." : "Reedem"}
+              {/* {isReedem
+                ? "Processing..."
+                  ? isReedem
+                  : "You ned x coins"
+                : "Reedem"} */}
+              {isReedem
+                ? `You need ${price - state.user.points} coins`
+                : loading
+                ? "Processing..."
+                : "Reedem"}
             </button>
           </div>
         </div>
