@@ -5,10 +5,10 @@ import React, {
   useReducer,
   useEffect,
 } from "react";
-import { Products, User, IContext } from "../components/types";
+import { Products, User, IContext, Amount } from "../components/types";
 import { userPage } from "../Hooks/usePager";
 import { reducer } from "./Reducer";
-import { postCoins } from "../pages/api/api";
+import { postCoins, postReedem } from "../pages/api/api";
 interface Context {
   children: React.ReactNode;
   state: IContext[];
@@ -22,7 +22,8 @@ interface Context {
   handleSearchFilter: (index: string) => void;
   handleAddCoins: (index: number) => void;
   setProducts: (index: Products[]) => void;
-  getUser: (indes: User) => void;
+  getUser: (index: User) => void;
+  handleRestart: (index: number) => void;
 }
 
 enum Sort {
@@ -64,7 +65,7 @@ export const useProvideFilters = () => {
   useEffect(() => {
     if (page > totalPages && totalPages !== 0) handleNavigate(totalPages);
     else if (page < 1) handleNavigate(page + 1);
-  });
+  }, [totalPages]);
 
   function getAllProducts(products: Products[]) {
     dispatch({
@@ -103,11 +104,17 @@ export const useProvideFilters = () => {
     });
   };
 
-  const handleAddCoins = async (coins: 1000 | 5000 | 7500) => {
+  const handleAddCoins = async (coins: Amount) => {
     const resp = await postCoins(coins);
     dispatch({
       type: "UPDATE_COINS",
       payload: resp["New Points"],
+    });
+  };
+  const handleRestart = (price: number) => {
+    dispatch({
+      type: "RESTART_COINS",
+      payload: price,
     });
   };
 
@@ -125,5 +132,6 @@ export const useProvideFilters = () => {
     handlePrevPage,
     getUser,
     handleAddCoins,
+    handleRestart,
   };
 };
