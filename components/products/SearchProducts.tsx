@@ -14,7 +14,7 @@ export default function SearchProducts({ products }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        placeholder="Search product"
+        placeholder="Search product..."
         name="searcher"
         onChange={handleChange}
         className="w-64 h-10 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block rounded-md sm:text-sm focus:ring-1"
