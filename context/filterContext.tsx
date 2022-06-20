@@ -106,10 +106,14 @@ export const useProvideFilters = () => {
 
   const handleAddCoins = async (coins: Amount) => {
     const resp = await postCoins(coins);
-    dispatch({
-      type: "UPDATE_COINS",
-      payload: resp["New Points"],
-    });
+    try {
+      dispatch({
+        type: "UPDATE_COINS",
+        payload: resp["New Points"],
+      });
+    } catch {
+      () => window.alert("error al realizar la accion");
+    }
     return resp;
   };
 
