@@ -59,6 +59,6 @@ export const postReedem = async (productId: string): Promise<Reedem> => {
     method
   )
     .then((res) => res.json())
-    .catch(() => console.log("Error al adquirir el producto"));
+    .catch(() => "error");
   return reedem;
 };

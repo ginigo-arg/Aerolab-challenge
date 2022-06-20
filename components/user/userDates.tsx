@@ -25,11 +25,15 @@ export default function UserDates(): JSX.Element {
   const addPoints = async () => {
     setLoading(true);
     const resp = await handleAddCoins(coinValue);
-    if (resp.success) {
-      ToastError("We're sorry, we couldn't reedem your coins");
-    } else {
-      setLoading(false);
-      NewPointsToast(`You remeded ${coinValue} coins`);
+    try {
+      if (resp.success) {
+        ToastError("We're sorry, we couldn't reedem your coins");
+      } else {
+        setLoading(false);
+        NewPointsToast(`You remeded ${coinValue} coins`);
+      }
+    } catch {
+      ToastError("We're sorry. We detect a problem with your conexion.");
     }
   };
 
@@ -39,7 +43,7 @@ export default function UserDates(): JSX.Element {
 
   return (
     <>
-      <div className="flex flex-row items-center  justify-around px-3 py-1 w-28">
+      <div className="flex flex-row items-center  justify-around px-1 w-24 md:px-3 md:w-28 py-1">
         <button
           onClick={ShowDropDown}
           className="border rounded-md hover:bg-slate-100"
