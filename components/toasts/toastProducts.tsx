@@ -22,7 +22,7 @@ export const SuccesToast = (message, image) => {
             />
           </div>
           <div className="ml-3 flex-1">
-            <p className="text-sm font-medium text-gray-900">¡Felicitations!</p>
+            <p className="text-sm font-medium text-gray-900">¡Congrulations!</p>
             <p className="mt-1 text-sm text-gray-500">{message}</p>
           </div>
         </div>
