@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { SuccesToast } from "../toasts/toastProducts";
 import { formatCurrency } from "../../utils/formatNumber";
 import { ToastError } from "../toasts/toastError";
+import SvgBuy from "../icons/buyBlue";
 
 type CardProduct = {
   name: string;
@@ -44,7 +45,17 @@ export default function CardProduct({
   return (
     <>
       <div className="flex justify-center">
-        <div className="rounded-lg shadow-lg bg-white max-w-sm  p-2">
+        <div className="rounded-lg shadow-lg bg-white max-w-sm p-2 relative">
+          <div
+            className={`
+          ${
+            isReedem
+              ? "w-8 rounded-full bg-sky-200 absolute top-2 right-2 mx-auto overflow-hidden p-1"
+              : "w-8 rounded-full bg-sky-500 absolute top-2 right-2 mx-auto overflow-hidden p-1"
+          }`}
+          >
+            <SvgBuy color="#fff" />
+          </div>
           <img className="lg:h-44 mx-auto" src={image} alt={name} />
           <div className="p-6">
             <div className="flex flex-row items-center justify-start">
