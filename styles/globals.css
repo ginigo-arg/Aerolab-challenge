@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "Rubik", system-ui, sans-serif !important;
+  overflow-x: hidden;
+  padding-right: 0px !important;
+}
+
 /* html,
 body {
   padding: 0;
