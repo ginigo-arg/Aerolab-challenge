@@ -1,14 +1,7 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useReducer,
-  useEffect,
-} from "react";
-import { Products, User, IContext, Amount } from "../components/types";
-import { userPage } from "../Hooks/usePager";
-import { reducer } from "./Reducer";
-import { postCoins, postReedem } from "../pages/api/api";
+import React, { createContext, useContext } from "react";
+import { Products, User, IContext } from "../components/types";
+import { useProvideFilters } from "../Hooks/useFilters";
+
 interface Context {
   children: React.ReactNode;
   state: IContext[];
@@ -26,11 +19,6 @@ interface Context {
   handleRestart: (index: number) => void;
 }
 
-enum Sort {
-  "Lowest Price" = 0,
-  "Highest Price" = 1,
-}
-
 export const filterContext = createContext({} as Context);
 
 export const FilterProvide: React.FC<Context> = ({ children }) => {
@@ -43,101 +31,4 @@ export const FilterProvide: React.FC<Context> = ({ children }) => {
 
 export const useFilters = () => {
   return useContext(filterContext);
-};
-
-const initialProducts = {
-  products: [],
-  filteredProducts: [],
-  user: [],
-};
-
-export const useProvideFilters = () => {
-  const limit: number = 16;
-  const { page, handleNavigate, handleNextPage, handlePrevPage } = userPage();
-  const [sort, setSort] = useState<Sort>(Sort["Highest Price"]);
-  const [state, dispatch] = useReducer(reducer, initialProducts);
-  const totalPageAll = Math.ceil(state.products.length / limit);
-  const totalPageFilter = Math.ceil(state.filteredProducts.length / limit);
-  const totalPages = state.filteredProducts.length
-    ? totalPageFilter
-    : totalPageAll;
-
-  useEffect(() => {
-    if (page > totalPages && totalPages !== 0) handleNavigate(totalPages);
-    else if (page < 1) handleNavigate(page + 1);
-  }, [totalPages]);
-
-  function getAllProducts(products: Products[]) {
-    dispatch({
-      type: "GET_ALL_PRODUCTS",
-      payload: products,
-    });
-  }
-  const getUser = (user: User) => {
-    dispatch({
-      type: "GET_USER",
-      payload: user,
-    });
-  };
-
-  const handleChangeFilter = (label: string, products) => {
-    dispatch({
-      type: "PRODUCTS_BY_CATEGORY",
-      payload: {
-        prod: products,
-        category: label,
-      },
-    });
-  };
-
-  const handleChangePrice = (num: number) => {
-    num === 0 ? setSort(Sort["Lowest Price"]) : setSort(Sort["Highest Price"]);
-  };
-
-  const handleSearchFilter = (query: string, products: Products) => {
-    dispatch({
-      type: "PRODUCTS_BY_QUERY",
-      payload: {
-        produc: products,
-        query: query,
-      },
-    });
-  };
-
-  const handleAddCoins = async (coins: Amount) => {
-    const resp = await postCoins(coins);
-    try {
-      dispatch({
-        type: "UPDATE_COINS",
-        payload: resp["New Points"],
-      });
-    } catch {
-      () => window.alert("error al realizar la accion");
-    }
-    return resp;
-  };
-
-  const handleRestart = (price: number) => {
-    dispatch({
-      type: "RESTART_COINS",
-      payload: price,
-    });
-  };
-
-  return {
-    state,
-    totalPages,
-    sort,
-    limit,
-    page,
-    getAllProducts,
-    handleChangeFilter,
-    handleChangePrice,
-    handleSearchFilter,
-    handleNextPage,
-    handlePrevPage,
-    getUser,
-    handleAddCoins,
-    handleRestart,
-  };
 };
