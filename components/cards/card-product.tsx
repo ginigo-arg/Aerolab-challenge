@@ -7,6 +7,7 @@ import { SuccesToast } from "../toasts/toastProducts";
 import { formatCurrency } from "../../utils/formatNumber";
 import { ToastError } from "../toasts/toastError";
 import SvgBuy from "../icons/buyBlue";
+import { motion, AnimatePresence } from "framer-motion";
 
 type CardProduct = {
   name: string;
@@ -42,9 +43,25 @@ export default function CardProduct({
   };
 
   useEffect(() => {}, [loading]);
+  const variants = {
+    hidden: { opacity: 0, duration: 0.1 },
+    visible: { opacity: 1 },
+  };
   return (
     <>
-      <div className="flex justify-center max-w-sm">
+      <motion.div
+        layout
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        initial={{ opacity: 0.3 }}
+        transition={{
+          duration: 0.3,
+          type: "spring",
+          stiffness: 200,
+          damping: 30,
+        }}
+        className="flex justify-center max-w-sm"
+      >
         <div className="rounded-lg shadow-lg bg-white max-w-sm p-2 relative overflow-hidden">
           <div
             className={`
@@ -88,7 +105,7 @@ export default function CardProduct({
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
       <Toaster position="bottom-left" reverseOrder={false} />
     </>
   );

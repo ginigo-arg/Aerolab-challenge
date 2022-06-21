@@ -8,6 +8,7 @@ import { SvgClose } from "../icons/close";
 import { SvgPlus } from "../icons/plus";
 import { ToastError } from "../toasts/toastError";
 import { NewPointsToast } from "../toasts/toastUser";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function UserDates(): JSX.Element {
   const { state, handleAddCoins } = useFilters();
@@ -40,6 +41,13 @@ export default function UserDates(): JSX.Element {
   const getCoinValue = (coin: number) => {
     setCoinValue(coin);
   };
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 5 },
+    },
+  };
 
   return (
     <>
@@ -58,6 +66,7 @@ export default function UserDates(): JSX.Element {
           height={32}
         />
       </div>
+      {/* dropDown */}
 
       <div
         id="dropDown"
