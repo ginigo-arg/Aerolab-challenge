@@ -1,7 +1,10 @@
-import Image from "next/image";
-
 export default function Slide() {
   return (
-    <Image src="/images/header-x1.png" alt="slide" width={1524} height={350} />
+    <div className="relative">
+      <img className="object-cover" src="/images/header-x1.png" alt="slide" />
+      <h1 className="absolute bottom-5 text-2xl lg:bottom-28 tracking-wider left-5 lg:left-10 lg:text-6xl text-white font-extrabold">
+        Electronics
+      </h1>
+    </div>
   );
 }
