@@ -44,8 +44,8 @@ export default function CardProduct({
   useEffect(() => {}, [loading]);
   return (
     <>
-      <div className="flex justify-center">
-        <div className="rounded-lg shadow-lg bg-white max-w-sm p-2 relative">
+      <div className="flex justify-center max-w-sm">
+        <div className="rounded-lg shadow-lg bg-white max-w-sm p-2 relative overflow-hidden">
           <div
             className={`
           ${
@@ -56,7 +56,7 @@ export default function CardProduct({
           >
             <SvgBuy color="#fff" />
           </div>
-          <img className="lg:h-44 mx-auto" src={image} alt={name} />
+          <img className="lg:max-h-44 mx-auto" src={image} alt={name} />
           <div className="p-6">
             <div className="flex flex-row items-center justify-start">
               <SvgCoin />
@@ -64,10 +64,12 @@ export default function CardProduct({
                 {formatCurrency(price)}
               </h2>
             </div>
-            <h5 className="text-gray-900 text-sm md:text-md lg:text-xl text-md font-medium mb-1">
+            <h5 className="text-gray-900 text-sm md:text-md lg:text-xl text-md font-medium mb-1 text-ellipsis overflow-hidden truncate ...">
               {name}
             </h5>
-            <p className="text-gray-700 text-base mb-4">{category}</p>
+            <p className="text-gray-700 text-base mb-4 text-ellipsis overflow-hidden truncate ...">
+              {category}
+            </p>
             <button
               onClick={reedemProduct}
               disabled={loading || isReedem}
