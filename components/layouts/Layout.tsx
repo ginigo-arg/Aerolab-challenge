@@ -21,7 +21,7 @@ export default function Layout({ children }: Props) {
         />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Gabriel Iñigo" />
+        <meta property="og:site_name" content="Aerolab challenge" />
         <meta property="og:description" content="Desafio Frontend Aerolab" />
         <meta property="og:title" content="Aerolab challenge" />
         <meta property="og:image" content="/images/og-image.png" />
