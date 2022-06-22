@@ -40,7 +40,7 @@ export default function LowHighPrice() {
           active.lowPrice === 1 ? `${isActive}` : `${notActive}`
         } hover:bg-gradient-to-r from-sky-500 to-indigo-500 hover:text-white py-2 px-4 md:px-8 rounded-md mr-2 font-semibold `}
       >
-        Lowest price
+        Lowest Price
       </button>
     </div>
   );
