@@ -26,7 +26,7 @@ export default function Layout({ children }: Props) {
         <meta property="og:title" content="Aerolab challenge" />
         <meta
           property="og:image"
-          content="https://vercel.com/ginigo-arg/aerolab-challenge/images/og-image.png"
+          content="https://aerolab-challenge-ginigo-arg.vercel.app/images/og-image.png"
         />
         <meta name="linkedin:card" content="summary_large_image" />
         <meta name="linkedin:site" content="@gabriel-inigo" />
@@ -37,7 +37,7 @@ export default function Layout({ children }: Props) {
         />
         <meta
           name="linkedin:image"
-          content="https://vercel.com/ginigo-arg/aerolab-challenge/images/og-image.png"
+          content="https://aerolab-challenge-ginigo-arg.vercel.app/images/og-image.png"
         />
         <link rel="shortcut icon" href="/images/aerolab-logo.svg" />
       </Head>
