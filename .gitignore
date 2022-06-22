@@ -14,8 +14,7 @@
 
 # production
 /build
-/env
-/.env
+
 env
 .env
 
@@ -31,6 +30,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -39,3 +39,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 .vercel
+.env
