@@ -12,9 +12,7 @@ interface Context {
   handleChangeFilter: (label: string, products: Products) => void;
   handleChangePrice: (number: number) => void;
   handleSearchFilter: (query: string, products: Products) => void;
-  handleAddCoins: (coins: number) => void;
-  getUser: (user: User) => void;
-  handleRestarCoins: (price: number) => void;
+
   handleNextPage: () => void;
   handlePrevPage: () => void;
 }

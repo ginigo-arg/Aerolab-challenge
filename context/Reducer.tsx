@@ -1,5 +1,3 @@
-import { Products } from "../components/types";
-
 export const reducer = (state, action: any): any => {
   switch (action.type) {
     case "GET_ALL_PRODUCTS":
@@ -19,21 +17,6 @@ export const reducer = (state, action: any): any => {
             .toLowerCase()
             .startsWith(action.payload.query.toLowerCase().trim())
         ),
-      };
-
-    case "GET_USER":
-      return { ...state, user: action.payload };
-
-    case "UPDATE_COINS":
-      state.user.points = action.payload;
-      return {
-        ...state,
-      };
-
-    case "RESTART_COINS":
-      state.user.points -= action.payload;
-      return {
-        ...state,
       };
 
     default:
