@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import Footer from "../Footer";
 import NavBar from "../NavBar";
 import { ProvideFilters } from "../../context/filterContext";
+import { ProvideUser } from "../../context/userContext";
 
 type Props = {
   children?: ReactNode;
@@ -42,15 +43,17 @@ export default function Layout({ children }: Props) {
         <link rel="shortcut icon" href="/images/aerolab-logo.svg" />
       </Head>
       <ProvideFilters>
-        <div className="flex flex-col mx-auto">
-          <header className="sticky top-0 bg-white z-20 shadow-md">
-            <NavBar />
-          </header>
-          <main>{children}</main>
-          <footer>
-            <Footer />
-          </footer>
-        </div>
+        <ProvideUser>
+          <div className="flex flex-col mx-auto">
+            <header className="sticky top-0 bg-white z-20 shadow-md">
+              <NavBar />
+            </header>
+            <main>{children}</main>
+            <footer>
+              <Footer />
+            </footer>
+          </div>
+        </ProvideUser>
       </ProvideFilters>
     </>
   );

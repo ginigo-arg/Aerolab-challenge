@@ -13,11 +13,10 @@ type Props = {
   user: User;
 };
 
-const Home: NextPage<Props> = ({ products, user }) => {
-  const { getAllProducts, getUser } = useFilters();
+const Home: NextPage<Props> = ({ products }) => {
+  const { getAllProducts } = useFilters();
   useEffect(() => {
     getAllProducts(products);
-    getUser(user);
   }, []);
   return (
     <>
@@ -34,6 +33,6 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const products = await getAllProducts();
-  const user = await getUser();
-  return { props: { products, user } };
+  // const user = await getUser();
+  return { props: { products } };
 };

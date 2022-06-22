@@ -1,4 +1,5 @@
 import { useFilters } from "../../context/filterContext";
+import { useUserInfo } from "../../context/userContext";
 import CardProduct from "../cards/card-product";
 import { Products } from "../types";
 
@@ -8,6 +9,7 @@ type Props = {
 
 export default function ProductList() {
   const { sort, state, page, limit, totalPages } = useFilters();
+  const { user } = useUserInfo();
   let products =
     state.filteredProducts.length > 0 ? state.filteredProducts : state.products;
   const offset = (page - 1) * limit;
@@ -38,7 +40,7 @@ export default function ProductList() {
                     category={product.product.category}
                     price={product.product.cost}
                     image={product.product.img.url}
-                    isReedem={product.product.cost > state.user["points"]}
+                    isReedem={product.product.cost > user?.points}
                   />
                 );
               }

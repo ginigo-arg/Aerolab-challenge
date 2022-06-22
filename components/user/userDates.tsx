@@ -1,16 +1,17 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GRAY_400 } from "../../colors";
 import { useFilters } from "../../context/filterContext";
+import { useUserInfo } from "../../context/userContext";
+import { useUser } from "../../Hooks/useUser";
 import Button from "../button";
 import { SvgClose } from "../icons/close";
 import { SvgPlus } from "../icons/plus";
 import { ToastError } from "../toasts/toastError";
 import { NewPointsToast } from "../toasts/toastUser";
-import { Amount } from "../types";
 
 export default function UserDates(): JSX.Element {
-  const { state, handleAddCoins } = useFilters();
+  const { userState, user, isLoading, handleAddCoins } = useUserInfo();
   const [coinValue, setCoinValue] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -53,7 +54,7 @@ export default function UserDates(): JSX.Element {
         <Image
           className="rounded-full"
           src="/images/Guillermo_francella.png"
-          alt={state.user["name"]}
+          alt="profile"
           width={32}
           height={32}
         />
@@ -73,7 +74,11 @@ export default function UserDates(): JSX.Element {
         </div>
         {/* dropDown body */}
         <div className="flex flex-col justify-between text-center ">
-          <h2 className="font-bold text-lg">{state.user["name"]}</h2>
+          {isLoading ? (
+            "name..."
+          ) : (
+            <h2 className="font-bold text-lg">{userState?.name}</h2>
+          )}
           <p>
             Add coins at your acount, selecting the score below and push Add
             coins button

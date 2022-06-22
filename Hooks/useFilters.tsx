@@ -11,7 +11,6 @@ enum Sort {
 const initialProducts = {
   products: [],
   filteredProducts: [],
-  user: [],
 };
 
 export const useProvideFilters = () => {
@@ -36,12 +35,8 @@ export const useProvideFilters = () => {
       payload: products,
     });
   };
-
-  const getUser = (user: User) => {
-    dispatch({
-      type: "GET_USER",
-      payload: user,
-    });
+  const handleChangePrice = (num: number) => {
+    num === 0 ? setSort(Sort["Lowest Price"]) : setSort(Sort["Highest Price"]);
   };
 
   const handleChangeFilter = (label: string, products: Products) => {
@@ -54,10 +49,6 @@ export const useProvideFilters = () => {
     });
   };
 
-  const handleChangePrice = (num: number) => {
-    num === 0 ? setSort(Sort["Lowest Price"]) : setSort(Sort["Highest Price"]);
-  };
-
   const handleSearchFilter = (query: string, products: Products) => {
     dispatch({
       type: "PRODUCTS_BY_QUERY",
@@ -65,26 +56,6 @@ export const useProvideFilters = () => {
         produc: products,
         query: query,
       },
-    });
-  };
-
-  const handleAddCoins = async (coins: number) => {
-    const resp = await postCoins(coins);
-    try {
-      dispatch({
-        type: "UPDATE_COINS",
-        payload: resp["New Points"],
-      });
-    } catch {
-      () => window.alert("error al realizar la accion");
-    }
-    return resp;
-  };
-
-  const handleRestarCoins = (price: number) => {
-    dispatch({
-      type: "RESTART_COINS",
-      payload: price,
     });
   };
 
@@ -100,8 +71,5 @@ export const useProvideFilters = () => {
     handleSearchFilter,
     handleNextPage,
     handlePrevPage,
-    getUser,
-    handleAddCoins,
-    handleRestarCoins,
   };
 };

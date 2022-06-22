@@ -17,7 +17,7 @@ export const getAllProducts = async (): Promise<Products[] | false> => {
 };
 
 export const getUser = async (): Promise<User | null> => {
-  const user = await fetch(process.env.API_URL_USER, methodGet)
+  const user = await fetch(process.env.NEXT_PUBLIC_API_URL_USER, methodGet)
     .then((res) => res.json())
     .catch(() => console.log("Error al obtener el usuario"));
 
