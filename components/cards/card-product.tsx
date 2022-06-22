@@ -27,14 +27,14 @@ export default function CardProduct({
   isReedem,
 }: CardProduct) {
   const [loading, setLoading] = useState<boolean>(false);
-  const { handleRestart, state } = useFilters();
+  const { handleRestarCoins, state } = useFilters();
   const reedemProduct = async () => {
     setLoading(true);
     const resp = await postReedem(id);
 
     if (resp.message) {
       setLoading(false);
-      handleRestart(price);
+      handleRestarCoins(price);
       SuccesToast(`You reedemed a ${name}`, image);
       //SuccesToast(resp.message, image);
     } else {
@@ -43,10 +43,7 @@ export default function CardProduct({
   };
 
   useEffect(() => {}, [loading]);
-  const variants = {
-    hidden: { opacity: 0, duration: 0.1 },
-    visible: { opacity: 1 },
-  };
+
   return (
     <>
       <motion.div
@@ -98,7 +95,7 @@ export default function CardProduct({
               } `}
             >
               {isReedem
-                ? `You need ${price - state.user.points} coins`
+                ? `You need ${price - state["user"]["points"]} coins`
                 : loading
                 ? "Processing..."
                 : "Reedem"}

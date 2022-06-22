@@ -1,34 +1,31 @@
 import React, { createContext, useContext } from "react";
-import { Products, User, IContext } from "../components/types";
+import { Products, User, State, Amount } from "../components/types";
 import { useProvideFilters } from "../Hooks/useFilters";
 
 interface Context {
-  children: React.ReactNode;
-  state: IContext[];
+  state: State;
   totalPages: number;
   sort: number;
   limit: number;
   page: number;
   getAllProducts: (index: Products[]) => void;
-  handleChangeFilter: (index: string) => void;
-  handleChangePrice: (index: number) => void;
-  handleSearchFilter: (index: string) => void;
-  handleAddCoins: (index: number) => void;
-  setProducts: (index: Products[]) => void;
-  getUser: (index: User) => void;
-  handleRestart: (index: number) => void;
+  handleChangeFilter: (label: string, products: Products) => void;
+  handleChangePrice: (number: number) => void;
+  handleSearchFilter: (query: string, products: Products) => void;
+  handleAddCoins: (coins: number) => void;
+  getUser: (user: User) => void;
+  handleRestarCoins: (price: number) => void;
+  handleNextPage: () => void;
+  handlePrevPage: () => void;
 }
 
-export const filterContext = createContext({} as Context);
+export const Context = createContext({} as Context);
 
-export const FilterProvide: React.FC<Context> = ({ children }) => {
+export const ProvideFilters = ({ children }) => {
   const filters = useProvideFilters();
-
-  return (
-    <filterContext.Provider value={filters}>{children}</filterContext.Provider>
-  );
+  return <Context.Provider value={filters}>{children}</Context.Provider>;
 };
 
 export const useFilters = () => {
-  return useContext(filterContext);
+  return useContext(Context);
 };

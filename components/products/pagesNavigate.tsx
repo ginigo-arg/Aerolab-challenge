@@ -1,9 +1,7 @@
-import SvgArrow from "../icons/arrow";
 import SvgArrowLeft from "../icons/arrowLeft";
 import SvgArrowRight from "../icons/arrowRight";
-import { GRAY_600, GRAY_400 } from "../../colors";
+import { GRAY_400 } from "../../colors";
 import { useFilters } from "../../context/filterContext";
-import { TEXT_GRADIENT } from "../../colors";
 export default function PagesNavigate() {
   const { page, totalPages, handleNextPage, handlePrevPage } = useFilters();
 

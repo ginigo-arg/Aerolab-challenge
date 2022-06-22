@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
 import { GRAY_400 } from "../../colors";
 import { useFilters } from "../../context/filterContext";
 import Button from "../button";
@@ -8,7 +7,7 @@ import { SvgClose } from "../icons/close";
 import { SvgPlus } from "../icons/plus";
 import { ToastError } from "../toasts/toastError";
 import { NewPointsToast } from "../toasts/toastUser";
-import { motion, AnimatePresence } from "framer-motion";
+import { Amount } from "../types";
 
 export default function UserDates(): JSX.Element {
   const { state, handleAddCoins } = useFilters();
@@ -27,7 +26,7 @@ export default function UserDates(): JSX.Element {
     setLoading(true);
     const resp = await handleAddCoins(coinValue);
     try {
-      if (resp.success) {
+      if (resp["success"]) {
         ToastError("We're sorry, we couldn't reedem your coins");
       } else {
         setLoading(false);
@@ -40,13 +39,6 @@ export default function UserDates(): JSX.Element {
 
   const getCoinValue = (coin: number) => {
     setCoinValue(coin);
-  };
-  const variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 5 },
-    },
   };
 
   return (
@@ -61,7 +53,7 @@ export default function UserDates(): JSX.Element {
         <Image
           className="rounded-full"
           src="/images/Guillermo_francella.png"
-          alt={state.user.name}
+          alt={state.user["name"]}
           width={32}
           height={32}
         />
@@ -81,7 +73,7 @@ export default function UserDates(): JSX.Element {
         </div>
         {/* dropDown body */}
         <div className="flex flex-col justify-between text-center ">
-          <h2 className="font-bold text-lg">{state.user.name}</h2>
+          <h2 className="font-bold text-lg">{state.user["name"]}</h2>
           <p>
             Add coins at your acount, selecting the score below and push Add
             coins button

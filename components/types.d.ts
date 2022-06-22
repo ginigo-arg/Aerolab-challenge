@@ -11,17 +11,17 @@ export interface Products {
 }
 
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   points: number;
   redeemHistory: [];
   createDate: Date;
 }
 
-export interface IContext {
+export interface State {
   products: Products[];
   filteredProducts: Products[];
-  user: User;
+  user: User[];
 }
 
 export interface Amount {

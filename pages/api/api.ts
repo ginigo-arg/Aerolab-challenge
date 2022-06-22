@@ -24,7 +24,7 @@ export const getUser = async (): Promise<User | null> => {
   return user;
 };
 
-export const postCoins = (amount: Amount): Promise<Amount> => {
+export const postCoins = (amount: number): Promise<Amount> => {
   const method = {
     method: "POST",
     headers: {

@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useState } from "react";
 import { userPage } from "../Hooks/usePager";
 import { reducer } from "../context/Reducer";
-import { postCoins, postReedem } from "../pages/api/api";
+import { postCoins } from "../pages/api/api";
+import { Products, User, Amount } from "../components/types";
 
 enum Sort {
   "Lowest Price" = 0,
@@ -29,12 +30,13 @@ export const useProvideFilters = () => {
     else if (page < 1) handleNavigate(page + 1);
   }, [totalPages]);
 
-  function getAllProducts(products: Products[]) {
+  const getAllProducts = (products: Products[]) => {
     dispatch({
       type: "GET_ALL_PRODUCTS",
       payload: products,
     });
-  }
+  };
+
   const getUser = (user: User) => {
     dispatch({
       type: "GET_USER",
@@ -42,7 +44,7 @@ export const useProvideFilters = () => {
     });
   };
 
-  const handleChangeFilter = (label: string, products) => {
+  const handleChangeFilter = (label: string, products: Products) => {
     dispatch({
       type: "PRODUCTS_BY_CATEGORY",
       payload: {
@@ -66,7 +68,7 @@ export const useProvideFilters = () => {
     });
   };
 
-  const handleAddCoins = async (coins: Amount) => {
+  const handleAddCoins = async (coins: number) => {
     const resp = await postCoins(coins);
     try {
       dispatch({
@@ -79,7 +81,7 @@ export const useProvideFilters = () => {
     return resp;
   };
 
-  const handleRestart = (price: number) => {
+  const handleRestarCoins = (price: number) => {
     dispatch({
       type: "RESTART_COINS",
       payload: price,
@@ -100,6 +102,6 @@ export const useProvideFilters = () => {
     handlePrevPage,
     getUser,
     handleAddCoins,
-    handleRestart,
+    handleRestarCoins,
   };
 };

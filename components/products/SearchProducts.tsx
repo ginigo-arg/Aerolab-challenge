@@ -1,8 +1,8 @@
 import React, { useContext, useReducer, useRef, useState } from "react";
-import { filterContext } from "../../context/filterContext";
+import { Context } from "../../context/filterContext";
 
 export default function SearchProducts({ products }) {
-  const { handleSearchFilter } = useContext(filterContext);
+  const { handleSearchFilter } = useContext(Context);
   const [query, setQuery] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);

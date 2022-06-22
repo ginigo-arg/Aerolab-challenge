@@ -21,7 +21,7 @@ const customStyles = {
     color: "#991b1b",
     width: "200px",
   }),
-  option: (provided: any, state: Props) => ({
+  option: (provided: any, state) => ({
     ...provided,
     color: "#4b5563",
     paddingLeft: 24,

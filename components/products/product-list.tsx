@@ -23,7 +23,7 @@ export default function ProductList() {
                 product: product,
               };
             })
-            .sort((a, b) => {
+            .sort((a: any, b: any) => {
               if (sort === 0) return a.product.cost - b.product.cost;
               if (sort === 1) return b.product.cost - a.product.cost;
               return a.index - b.index;
@@ -38,7 +38,7 @@ export default function ProductList() {
                     category={product.product.category}
                     price={product.product.cost}
                     image={product.product.img.url}
-                    isReedem={product.product.cost > state.user.points}
+                    isReedem={product.product.cost > state.user["points"]}
                   />
                 );
               }

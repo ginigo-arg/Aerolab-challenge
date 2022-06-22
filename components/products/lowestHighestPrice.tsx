@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { filterContext, useFilters } from "../../context/filterContext";
+import { Context, useFilters } from "../../context/filterContext";
 
 export default function LowHighPrice() {
-  const { handleChangePrice } = useContext(filterContext);
+  const { handleChangePrice } = useContext(Context);
   const [active, setActive] = useState({
     lowPrice: 0,
     highPrice: 1,
