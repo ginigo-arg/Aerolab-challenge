@@ -8,6 +8,8 @@ import { formatCurrency } from "../../utils/formatNumber";
 import { ToastError } from "../toasts/toastError";
 import SvgBuy from "../icons/buyBlue";
 import { motion, AnimatePresence } from "framer-motion";
+import { userInfo } from "os";
+import { useUserInfo } from "../../context/userContext";
 
 type CardProduct = {
   name: string;
@@ -27,7 +29,7 @@ export default function CardProduct({
   isReedem,
 }: CardProduct) {
   const [loading, setLoading] = useState<boolean>(false);
-  const { handleRestarCoins, state } = useFilters();
+  const { handleRestarCoins, userState } = useUserInfo();
   const reedemProduct = async () => {
     setLoading(true);
     const resp = await postReedem(id);
@@ -95,7 +97,7 @@ export default function CardProduct({
               } `}
             >
               {isReedem
-                ? `You need ${price - state["user"]["points"]} coins`
+                ? `You need ${price - userState?.points} coins`
                 : loading
                 ? "Processing..."
                 : "Reedem"}
