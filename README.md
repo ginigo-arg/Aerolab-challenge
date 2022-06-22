@@ -1,4 +1,4 @@
-# Aerolab challenge | Nextjs + TypeScript
+# Aerolab challenge | Nextjs + TypeScript + TailwindCSS
 
 ## Caracteristicas de la App
 
