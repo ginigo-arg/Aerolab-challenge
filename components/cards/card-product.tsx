@@ -43,7 +43,7 @@ export default function CardProduct({
     }
   };
 
-  useEffect(() => {}, [userState]);
+  useEffect(() => {}, [loading]);
 
   return (
     <>
