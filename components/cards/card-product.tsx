@@ -33,10 +33,9 @@ export default function CardProduct({
   const reedemProduct = async () => {
     setLoading(true);
     const resp = await postReedem(id);
-
+    setLoading(false);
+    handleRestarCoins(price);
     if (resp.message) {
-      setLoading(false);
-      handleRestarCoins(price);
       SuccesToast(`You reedemed a ${name}`, image);
       //SuccesToast(resp.message, image);
     } else {
@@ -44,7 +43,7 @@ export default function CardProduct({
     }
   };
 
-  useEffect(() => {}, [loading]);
+  useEffect(() => {}, [userState]);
 
   return (
     <>
